@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -8,39 +9,31 @@ const camera = new THREE.PerspectiveCamera(
     20,
 );
 
-camera.position.z = 5;
+camera.position.z = 2;
 
-const cubegeo = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
-const cubemat = new THREE.MeshBasicMaterial({ color: "red", wireframe: true });
-const cube = new THREE.Mesh(cubegeo, cubemat);
+const geometry = new THREE.BufferGeometry();
+const vertices = new Float32Array(2000);
 
-cube.position.x = -1;
-scene.add(cube);
+for (let i = 0; i <= 1000 * 3; i++) {
+    vertices[i] = Math.random() - 0.5;
+}
 
-const spheregeo = new THREE.SphereGeometry(1, 40, 15);
-const spheremat = new THREE.MeshBasicMaterial({
-    color: "blue",
-    wireframe: true,
-});
-const sphere = new THREE.Mesh(spheregeo, spheremat);
-
-sphere.position.x = 1;
-scene.add(sphere);
+geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+const material = new THREE.MeshBasicMaterial({ color: "red", wireframe: true });
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
 
 const canvas = document.querySelector("canvas");
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-// rotation
-// cube.rotation.z = Math.PI - 0.1;
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
 
-// grouping
-const group = new THREE.Group();
-group.add(cube);
-group.add(sphere);
-
-// adding group into scene
-scene.add(group);
-group.position.x = -2;
-
-renderer.render(scene, camera);
+function animate() {
+    window.requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+}
+animate();
