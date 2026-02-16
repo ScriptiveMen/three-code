@@ -9,18 +9,18 @@ const camera = new THREE.PerspectiveCamera(
     20,
 );
 
-camera.position.z = 2;
+camera.position.z = 5;
 
-const geometry = new THREE.BufferGeometry();
-const vertices = new Float32Array(2000);
+const light = new THREE.DirectionalLight("white", 2);
+light.position.set(2, 1, 2);
+scene.add(light);
 
-for (let i = 0; i <= 1000 * 3; i++) {
-    vertices[i] = Math.random() - 0.5;
-}
+const helper = new THREE.DirectionalLightHelper(light, 0.8);
+scene.add(helper);
 
-geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
-const material = new THREE.MeshBasicMaterial({ color: "red", wireframe: true });
-const mesh = new THREE.Mesh(geometry, material);
+const geo = new THREE.SphereGeometry(1, 40, 40);
+const material = new THREE.MeshStandardMaterial({ color: "white" });
+const mesh = new THREE.Mesh(geo, material);
 scene.add(mesh);
 
 const canvas = document.querySelector("canvas");
@@ -28,8 +28,6 @@ const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
 
 function animate() {
     window.requestAnimationFrame(animate);
