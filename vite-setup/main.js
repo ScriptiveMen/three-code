@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -15,13 +16,20 @@ const light = new THREE.DirectionalLight("white", 2);
 light.position.set(2, 1, 2);
 scene.add(light);
 
-const helper = new THREE.DirectionalLightHelper(light, 0.8);
-scene.add(helper);
+const textureLoader = new THREE.TextureLoader();
+const tex = textureLoader.load("./map.png");
+tex.colorSpace = THREE.SRGBColorSpace;
 
 const geo = new THREE.SphereGeometry(1, 40, 40);
-const material = new THREE.MeshStandardMaterial({ color: "white" });
+const material = new THREE.MeshStandardMaterial({ map: tex });
 const mesh = new THREE.Mesh(geo, material);
 scene.add(mesh);
+
+let hdri = new RGBELoader();
+hdri.load("", function (hdritexture) {
+    hdritexture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.environment = hdritexture;
+});
 
 const canvas = document.querySelector("canvas");
 const renderer = new THREE.WebGLRenderer({ canvas });
