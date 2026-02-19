@@ -18,6 +18,7 @@ scene.add(mesh);
 const canvas = document.querySelector("canvas");
 const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const mouse = {
     x: 0,
@@ -27,6 +28,12 @@ const mouse = {
 window.addEventListener("mousemove", function (e) {
     mouse.x = e.clientX / window.innerWidth;
     mouse.y = e.clientY / window.innerHeight;
+});
+
+window.addEventListener("resize", function (e) {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.updateProjectionMatrix();
 });
 
 function animate() {
