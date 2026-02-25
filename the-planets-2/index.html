@@ -7,7 +7,39 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <canvas class="h-screen w-screen"></canvas>
+        <div
+            class="h-screen w-full overflow-hidden font-['Helvetica_Now_Display']"
+        >
+            <div class="h-full w-full absolute top-0 left-0">
+                <nav
+                    class="w-full py-5 px-10 text-white flex items-center justify-between"
+                >
+                    <h3 class="text-xl">Planets</h3>
+                    <div class="flex items-center justify-center gap-8">
+                        <a class="text-[0.99rem]" href="#">Home</a>
+                        <a class="text-[0.99rem]" href="#">Services</a>
+                        <a class="text-[0.99rem]" href="#">Reach Us</a>
+                    </div>
+                </nav>
+
+                <div
+                    class="heading absolute left-1/2 text-white -translate-x-1/2 top-[15%] text-center"
+                >
+                    <h1 class="text-[6.3rem] leading-none font-['Bellina']">
+                        Earth
+                    </h1>
+                    <p class="text-sm py-1">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    </p>
+
+                    <div
+                        class="h-px w-96 bg-linear-to-r from-transparent via-white to-transparent mt-4"
+                    ></div>
+                </div>
+            </div>
+
+            <canvas class="canvas"></canvas>
+        </div>
         <script type="module" src="main.js"></script>
     </body>
 </html>

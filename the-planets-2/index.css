@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Helvetica Now Display";
+    src: url("./Helvetica Now Display.ttf");
+}
+
+@font-face {
+    font-family: "Bellina";
+    src: url("./Bellina.ttf");
+}
