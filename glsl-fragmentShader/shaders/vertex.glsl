@@ -108,7 +108,7 @@ void main() {
     vUv=uv;
     vec4 modelPosition=modelMatrix*vec4(position,1.);
     noise=cnoise(vec3(modelPosition.xy, uTime*0.3));
-    modelPosition.z +=noise;
+    // modelPosition.z +=noise;
 
     vec4 viewPosition=viewMatrix*modelPosition;
     vec4 projectedPosition=projectionMatrix*viewPosition;
