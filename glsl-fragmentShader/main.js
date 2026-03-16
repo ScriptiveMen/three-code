@@ -12,7 +12,7 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.z = 5;
 
-const geometry = new THREE.BoxGeometry(2, 2);
+const geometry = new THREE.PlaneGeometry(2, 3, 100, 100);
 const material = new THREE.ShaderMaterial({
     vertexShader: vertex,
     fragmentShader: fragment,
