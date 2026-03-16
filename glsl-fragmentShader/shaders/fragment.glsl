@@ -1,11 +1,11 @@
 varying vec2 vUv;
 uniform float uTime;
+varying float noise;
 
 void main() {
 
-
-  float val= clamp(-1.,1.,vUv.x);
-
-    gl_FragColor = vec4(val,val,val,1.);
+    vec4 color = vec4(1.0, 0.0, 0.0, 1.0);
+    color.rgb+=noise;
+    gl_FragColor = color;
 
 }
